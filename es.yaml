@@ -24,17 +24,18 @@ Resources:
         Enabled: true
         InternalUserDatabaseEnabled: true
         MasterUserOptions:
+            #MasterUserARN: String  ##If you set this then flip InternalUserDatabaseEnabled: false and you do not need the next two settings on lines 28 and 29
             MasterUserName: "master-user"
-            MasterUserPassword: "Abcd1234#&"
+            MasterUserPassword: "Abxxxx4#&"
       AccessPolicies:
         Version: "2012-10-17"
         Statement:
           -
             Effect: "Allow"
             Principal:
-              AWS: "arn:aws:iam::897196139566:user/es-user"
+              AWS: "arn:aws:iam::897xxxxxx66:user/es-user"
             Action: "es:*"
-            Resource: "arn:aws:es:us-west-2:897196139566:domain/test/*"
+            Resource: "arn:aws:es:us-west-2:897xxxxxx66:domain/test/*"
       AdvancedOptions:
         rest.action.multi.allow_explicit_index: true
       EncryptionAtRestOptions:

@@ -18,7 +18,7 @@ Now, Amazon ES/Opendistro for ES provides two ways of enabling FGAC. One is thro
  
 You may create an IAM user to trigger this CFN template. Make sure the IAM user has permission over creating ES and CFN resources. Further, configure your AWS CLI to use this IAM user and then use the following command to run the es.yaml through cloudformation that will spin up a Amazon ES FGAC enabled domain for you. 
 
-> aws --region us-west-2 cloudformation create-stack --stack-name give-any-stack-name-here --template-body file://es.yaml 
+``` aws --region us-west-2 cloudformation create-stack --stack-name give-any-stack-name-here --template-body file://es.yaml ```
 
 Please note the --template-body argument must be specified as a file URI else it returns unsupported structure/format error. 
  

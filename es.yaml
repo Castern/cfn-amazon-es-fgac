@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Testing Amazon Elasticsearch with fine grained access control using Cloudformation"
+Resources:
+  ElasticsearchDomain:
+    Type: 'AWS::Elasticsearch::Domain'
+    Properties:
+      DomainName: "cloudformation-fgac-test"
+      ElasticsearchVersion: 7.9
+      ElasticsearchClusterConfig:
+        DedicatedMasterEnabled: true
+        InstanceCount: "2"
+        ZoneAwarenessEnabled: true
+        InstanceType: "m5.large.elasticsearch"
+        DedicatedMasterType: "t3.medium.elasticsearch"
+        DedicatedMasterCount: "3"
+      EBSOptions:
+        EBSEnabled: true
+        Iops: 0
+        VolumeSize: 20
+        VolumeType: "gp2"
+      SnapshotOptions:
+        AutomatedSnapshotStartHour: "0"
+      AdvancedSecurityOptions:
+        Enabled: true
+        InternalUserDatabaseEnabled: true
+        MasterUserOptions:
+            MasterUserName: "master-user"
+            MasterUserPassword: "Abcd1234#&"
+      AccessPolicies:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              AWS: "arn:aws:iam::897196139566:user/es-user"
+            Action: "es:*"
+            Resource: "arn:aws:es:us-west-2:897196139566:domain/test/*"
+      AdvancedOptions:
+        rest.action.multi.allow_explicit_index: true
+      EncryptionAtRestOptions:
+        Enabled: true
+      NodeToNodeEncryptionOptions:
+        Enabled: true
+      DomainEndpointOptions:
+        EnforceHTTPS: true
+
+
